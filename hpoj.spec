@@ -55,8 +55,6 @@ mv -f $RPM_BUILD_ROOT%{_sbindir}/ptal-init $RPM_BUILD_ROOT%{_initrddir}/ptal-ini
 
 ln -sf %{_initrddir}/ptal-init $RPM_BUILD_ROOT%{_sbindir}/ptal-init
 
-gzip -9nf README
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -71,7 +69,7 @@ chkconfig --add ptal-init
 
 %files
 %defattr(644,root,root,755)
-%doc README.gz
+%doc README
 %doc doc/*.html
 %attr(755,root,root) %{_bindir}/ptal-connect
 %attr(755,root,root) %{_bindir}/ptal-print
