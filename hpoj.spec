@@ -6,6 +6,7 @@ Release:	1
 License:	GPL
 Group:          Applications/Graphics
 Source0:	ftp://hpoj.sourceforge.net/download/%{name}-%{version}.tgz
+# Source0-md5:	225b5b946d4b11a29a051e04df4c825d
 Patch0:		%{name}-ptal-hp.patch
 URL:		http://hpoj.sourceforge.net/
 BuildRequires:	qt-devel
