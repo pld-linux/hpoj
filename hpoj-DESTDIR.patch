@@ -1,5 +1,5 @@
---- hpoj-0.90/Makefile.in.orig	2002-07-26 14:05:04.000000000 +0200
-+++ hpoj-0.90/Makefile.in	2003-06-30 23:58:40.000000000 +0200
+--- hpoj-0.91/Makefile.in.orig	2003-09-23 03:16:41.000000000 +0200
++++ hpoj-0.91/Makefile.in	2003-12-14 22:13:13.701683136 +0100
 @@ -88,45 +88,37 @@
  
  user_install:
@@ -43,11 +43,11 @@
  	@ export PATH=/sbin:/usr/sbin:$$PATH:/usr/local/bin ; \
 -	if test `id -u` -eq 0 ; then \
 -		if test -d /etc/profile.d ; then \
--			echo "export PATH=$(sbindir):$(bindir):\$$PATH" >/etc/profile.d/hpoj.sh ; \
--			echo "setenv PATH $(sbindir):$(bindir):\$$PATH" >/etc/profile.d/hpoj.csh ; \
+-			echo "export PATH=$(bindir):$(sbindir):\$$PATH" >/etc/profile.d/hpoj.sh ; \
+-			echo "setenv PATH $(bindir):$(sbindir):\$$PATH" >/etc/profile.d/hpoj.csh ; \
 -			chmod +x /etc/profile.d/hpoj.sh /etc/profile.d/hpoj.csh ; \
 -		else \
--			echo "You may need to add $(sbindir) and $(bindir) to your PATH." ; \
+-			echo "You may need to add $(bindir) and $(sbindir) to your PATH." ; \
 -		fi ; \
 -		echo ; \
 -		for dir in /etc/init.d /etc/rc.d/init.d /sbin/init.d XXXX ; do \
@@ -56,7 +56,7 @@
  			if test $$dir = XXXX ; then \
  				if ! test -d /usr/local/etc/rc.d ; then \
  					echo "Warning: couldn't find SysV init script directory!" ; \
-@@ -134,77 +126,30 @@
+@@ -134,41 +126,26 @@
  					echo "setting ptal-init to start at bootup."; \
  				else \
  					echo "Setting /usr/local/etc/rc.d/ptal-init.sh symlink." ; \
@@ -87,59 +87,20 @@
 -			if ! test -L $(SANE_BACKEND_DIR)/libsane-hpoj.so.1 ; then \
 -				echo "Setting libsane-hpoj.so symlink." ; \
 -				$(LN_S) -f $(libdir)/libsane-hpoj.so $(SANE_BACKEND_DIR)/libsane-hpoj.so.1 ; \
-+			install -d $(DESTDIR)$(SANE_BACKEND_DIR) ; \
-+			if ! test -f $(SANE_BACKEND_DIR)/libsane-hpoj.so.1 ; then \
-+				mv -f $(DESTDIR)$(libdir)/libsane-hpoj.so* $(DESTDIR)$(SANE_BACKEND_DIR) ; \
- 			fi ; \
+-			fi ; \
 -			if ! grep ^hpoj $(SANE_ETC_DIR)/dll.conf >/dev/null 2>/dev/null ; then \
-+			if ! grep ^hpoj $(DESTDIR)$(SANE_ETC_DIR)/dll.conf >/dev/null 2>/dev/null ; then \
- 				echo "Adding hpoj entry to $(SANE_ETC_DIR)/dll.conf." ; \
+-				echo "Adding hpoj entry to $(SANE_ETC_DIR)/dll.conf." ; \
 -				echo hpoj >>$(SANE_ETC_DIR)/dll.conf ; \
 -			fi ; \
--		fi ; \
--		echo ; \
++			install -d $(DESTDIR)$(SANE_BACKEND_DIR) ; \
++			mv -f $(DESTDIR)$(libdir)/libsane-hpoj.so* $(DESTDIR)$(SANE_BACKEND_DIR) ; \
+ 		fi ; \
+ 		echo ; \
 -		if ! grep $(libdir) /etc/ld.so.conf >/dev/null 2>/dev/null ; then \
 -			echo "Adding $(libdir) to /etc/ld.so.conf." ; \
 -			echo $(libdir) >>/etc/ld.so.conf ; \
 -		fi ; \
 -		ldconfig ; \
--	else \
--		if ! test -d /etc/profile.d || ! test -f /etc/profile.d/hpoj.sh || ! test -f /etc/profile.d/hpoj.csh ; then \
--			echo "You may need to add $(sbindir) and $(bindir) to your PATH." ; \
--		fi ; \
--		echo ; \
--		if test -n "$(CUPS_BACKEND_DIR)" -a ! -L $(CUPS_BACKEND_DIR)/ptal ; then \
--			echo "As root, please run the command \"ln -sf $(sbindir)/ptal-cups $(CUPS_BACKEND_DIR)/ptal\"." ; \
--		fi ; \
--		echo ; \
--		if test -n "$(SANE_BACKEND_DIR)" -a -n "$(SANE_ETC_DIR)" ; then \
--			if ! test -L $(SANE_BACKEND_DIR)/libsane-hpoj.so.1 ; then \
--				echo "As root, please run the command \"ln -sf $(libdir)/libsane-hpoj.so $(SANE_BACKEND_DIR)/libsane-hpoj.so.1\"." ; \
--			fi ; \
--			if ! grep ^hpoj $(SANE_ETC_DIR)/dll.conf >/dev/null 2>/dev/null ; then \
--				echo "As root, please add \"hpoj\" entry to \"$(SANE_ETC_DIR)/dll.conf\"." ; \
-+				echo hpoj >>$(DESTDIR)$(SANE_ETC_DIR)/dll.conf ; \
- 			fi ; \
- 		fi ; \
- 		echo ; \
--		if ! grep $(libdir) /etc/ld.so.conf >/dev/null 2>/dev/null ; then \
--			echo "As root, please add the line \"$(libdir)\"" ; \
--			echo "         to the file \"/etc/ld.so.conf\" and run \"ldconfig\"." ; \
--		fi ; \
- 	fi
--	@ echo
--	@ for file in bin/hpo bin/ieee12844_print bin/ptal-printd bin/addpjl lib/ieee12844.o lib/ieee12844pp.o etc/ptal-start.conf etc/ptal-start.conf.new etc/ptal-stop.conf etc/ptal-stop.conf.new share/pixmaps/hpoj doc/hpoj ; do \
--		if test -f $(prefix)/$$file ; then \
--			if test $$file = bin/addpjl && test -f $(prefix)/bin/addcr ; then \
--				file="$$file and $(prefix)/bin/addcr"; \
--			fi ; \
--			echo "Please remove obsolete file \"$(prefix)/$$file\"." ; \
--		fi ; \
--		if test -f /$$file ; then \
--			echo "Please remove obsolete file \"/$$file\"." ; \
--		fi ; \
--		if test -d $(prefix)/$$file ; then \
--			echo "Please remove obsolete directory \"$(prefix)/$$file\"." ; \
--		fi ; \
--	done
--	@ echo
+ 	else \
+ 		if ! test -d /etc/profile.d || ! test -f /etc/profile.d/hpoj.sh || ! test -f /etc/profile.d/hpoj.csh ; then \
+ 			echo "You may need to add $(bindir) and $(sbindir) to your PATH." ; \

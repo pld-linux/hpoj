@@ -57,14 +57,3 @@
  fi
  if test -n "$SANE_ETC_DIR" ; then
  	AC_MSG_RESULT($SANE_ETC_DIR)
-@@ -388,9 +388,7 @@
- 	if test -n "$HIDE_QT" ; then
- 		AC_MSG_RESULT(check not done)
- 	else
--		changequote(<<,>>)dnl
--		AC_MSG_RESULT(<<no: try \"$0 --with-qt[-moc|-includes]=<dir>\">>)
--		changequote([,])dnl
-+		AC_MSG_RESULT([no: try \"$0 --with-qt[-moc|-includes]=<dir>\"])
- 	fi
- 	AC_MSG_RESULT(*** Disabling xojpanel support due to lack of QT ***)
- fi

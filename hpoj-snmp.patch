@@ -1,15 +1,15 @@
---- hpoj-0.90/configure.in.orig	2003-07-01 00:06:31.000000000 +0200
-+++ hpoj-0.90/configure.in	2003-07-01 00:09:41.000000000 +0200
-@@ -124,7 +124,7 @@
+--- hpoj-0.91/configure.in.orig	2003-12-14 22:14:40.823438616 +0100
++++ hpoj-0.91/configure.in	2003-12-14 22:18:43.840494408 +0100
+@@ -187,7 +187,7 @@
  fi
  
  AC_MSG_CHECKING(for snmp.h)
--dirs="$SNMP_PATH /usr/include /usr/include/*snmp* /usr/local/include /usr/local/include/*snmp* XXXXXXXX"
-+dirs="$SNMP_PATH /usr/include /usr/include/*snmp* /usr/include/*snmp*/library /usr/local/include /usr/local/include/*snmp* XXXXXXXX"
+-dirs="$SNMP_PATH /usr/include /usr/include/ucd-snmp /usr/include/*snmp* /usr/local/include /usr/local/include/ucd-snmp /usr/local/include/*snmp* XXXXXXXX"
++dirs="$SNMP_PATH /usr/include /usr/include/net-snmp/library /usr/include/ucd-snmp /usr/include/*snmp* /usr/local/include /usr/local/include/ucd-snmp /usr/local/include/*snmp* XXXXXXXX"
  for dir in $dirs ; do
  	if test "$dir" = XXXXXXXX ; then
  		if test -z "$HIDE_SNMP" ; then
-@@ -142,11 +142,19 @@
+@@ -205,11 +205,19 @@
  	    for lflagDir in "" "-L$dir/../lib" "-L$dir/../../lib" ; do
  	      for lflagCrypto in "" "-lcrypto" ; do
  		unset ac_cv_lib_snmp_snmp_open
