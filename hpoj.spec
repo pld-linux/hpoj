@@ -1,12 +1,12 @@
 Summary:	HP OfficeJet Linux driver
 Summary(pl):	Sterowniki dla urz±dzeñ HP OfficeJet
 Name:		hpoj
-Version:	0.90
+Version:	0.91
 Release:	1
 License:	GPL
 Group:		Applications/Graphics
 Source0:	http://dl.sourceforge.net/hpoj/%{name}-%{version}.tgz
-# Source0-md5:	dd76385c20bccabf6f5446b1004d8372
+# Source0-md5:	0e083aeab9b00495aa433fa9465456e0
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-dirs.patch
