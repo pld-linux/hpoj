@@ -1,14 +1,16 @@
 Summary:	HP OfficeJet Linux driver
 Summary(pl):	Sterowniki dla urz±dzeñ HP OfficeJet
 Name:		hpoj
-URL:		http://hpoj.sourceforge.net/
 Version:	0.8
 Release:	1
 License:	GPL
 Group:          Applications/Graphics
 Source0:	ftp://hpoj.sourceforge.net/download/%{name}-%{version}.tgz
 Patch0:		%{name}-ptal-hp.patch
+URL:		http://hpoj.sourceforge.net/
 BuildRequires:	qt-devel
+Requires(post,preun):	/sbin/chkconfig
+Requires(post):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -40,38 +42,36 @@ i kontrolê jego parametrów.
 
 %build
 %configure
-make etcdir=%{_sysconfdir}
+%{__make} etcdir=%{_sysconfdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_initrddir}
+
+install -d $RPM_BUILD_ROOT{%{_initrddir},/dev/ptal-{mlcd,printd}}
+
 %makeinstall etcdir=$RPM_BUILD_ROOT%{_sysconfdir}
-install -d $RPM_BUILD_ROOT/dev/ptal-mlcd
-install -d $RPM_BUILD_ROOT/dev/ptal-printd
-mv %{buildroot}%{_sbindir}/ptal-init %{buildroot}%{_initrddir}/ptal-init
-ln -s %{_initrddir}/ptal-init %{buildroot}%{_sbindir}/ptal-init
 
-%post
-# Add daemon as a system service
-chkconfig --add ptal-init
-# Update run-time link bindings
-/sbin/ldconfig
+mv -f $RPM_BUILD_ROOT%{_sbindir}/ptal-init $RPM_BUILD_ROOT%{_initrddir}/ptal-init
 
-%preun
-# Remove daemon from system services
-/sbin/chkconfig --del ptal-init
+ln -sf %{_initrddir}/ptal-init $RPM_BUILD_ROOT%{_sbindir}/ptal-init
 
-%postun
-# Update run-time link bindings
-/sbin/ldconfig
+gzip -9nf README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-rm -rf $RPM_BUILD_DIR/%{name}-%{version}
+
+%post
+chkconfig --add ptal-init
+/sbin/ldconfig
+
+%preun
+/sbin/chkconfig --del ptal-init
+
+%postun	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc  README
+%doc README.gz
 %doc doc/*.html
 %attr(755,root,root) %{_bindir}/ptal-connect
 %attr(755,root,root) %{_bindir}/ptal-print
@@ -84,8 +84,8 @@ rm -rf $RPM_BUILD_DIR/%{name}-%{version}
 %attr(755,root,root) %{_sbindir}/ptal-init
 %{_includedir}/ptal.h
 %{_libdir}/libptal.so*
-%config %{_sysconfdir}/ptal-start.conf
-%config %{_sysconfdir}/ptal-stop.conf
+%config(noreplace) %verify(size mtime md5) %{_sysconfdir}/ptal-start.conf
+%config(noreplace) %verify(size mtime md5) %{_sysconfdir}/ptal-stop.conf
 %{_initrddir}/ptal-init
 %dir /dev/ptal-printd
 %dir /dev/ptal-mlcd
