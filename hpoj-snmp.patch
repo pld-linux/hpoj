@@ -1,0 +1,33 @@
+--- hpoj-0.90/configure.in.orig	2003-07-01 00:06:31.000000000 +0200
++++ hpoj-0.90/configure.in	2003-07-01 00:09:41.000000000 +0200
+@@ -124,7 +124,7 @@
+ fi
+ 
+ AC_MSG_CHECKING(for snmp.h)
+-dirs="$SNMP_PATH /usr/include /usr/include/*snmp* /usr/local/include /usr/local/include/*snmp* XXXXXXXX"
++dirs="$SNMP_PATH /usr/include /usr/include/*snmp* /usr/include/*snmp*/library /usr/local/include /usr/local/include/*snmp* XXXXXXXX"
+ for dir in $dirs ; do
+ 	if test "$dir" = XXXXXXXX ; then
+ 		if test -z "$HIDE_SNMP" ; then
+@@ -142,11 +142,19 @@
+ 	    for lflagDir in "" "-L$dir/../lib" "-L$dir/../../lib" ; do
+ 	      for lflagCrypto in "" "-lcrypto" ; do
+ 		unset ac_cv_lib_snmp_snmp_open
+-		AC_CHECK_LIB(snmp,snmp_open,
++		AC_CHECK_LIB(netsnmp,snmp_open,
+ 			[DEFINES_CMDLINE="$DEFINES_CMDLINE -DHAVE_SNMP"
+ 			 INCLUDE_PATH=$INCLUDE_PATH:$dir
+-			 LIBSNMP_CMDLINE="$lflagDir -lsnmp $lflagCrypto"
++			 LIBSNMP_CMDLINE="$lflagDir -lnetsnmp $lflagCrypto"
+ 			 break 2
++			],
++			[AC_CHECK_LIB(snmp,snmp_open,
++				[DEFINES_CMDLINE="$DEFINES_CMDLINE -DHAVE_SNMP"
++				 INCLUDE_PATH=$INCLUDE_PATH:$dir
++				 LIBSNMP_CMDLINE="$lflagDir -lsnmp $lflagCrypto"
++				 break 2
++				],,
++				$lflagDir $lflagCrypto)
+ 			],,
+ 			$lflagDir $lflagCrypto)
+ 	      done

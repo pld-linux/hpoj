@@ -1,0 +1,70 @@
+--- hpoj-0.90/configure.in.orig	2002-08-08 00:26:38.000000000 +0200
++++ hpoj-0.90/configure.in	2003-07-01 00:01:44.000000000 +0200
+@@ -166,8 +166,8 @@
+ if test "$with_cups_backend" != no ; then
+ 	unset CUPS_BACKEND_DIR_POSSIBILITIES
+ 	if test "$with_cups_backend" != yes ; then
+-		CUPS_BACKEND_DIR_POSSIBILITIES=$with_cups_backend
+-	fi
++		CUPS_BACKEND_DIR=$with_cups_backend
++	else
+ 	CUPS_BACKEND_DIR_POSSIBILITIES="$CUPS_BACKEND_DIR_POSSIBILITIES /usr/local/lib/cups/backend /usr/lib/cups/backend"
+ 	for dir in $CUPS_BACKEND_DIR_POSSIBILITIES ; do
+ 		if test -d $dir ; then
+@@ -175,6 +175,7 @@
+ 			break
+ 		fi
+ 	done
++	fi
+ fi
+ if test -n "$CUPS_BACKEND_DIR" ; then
+ 	AC_MSG_RESULT($CUPS_BACKEND_DIR)
+@@ -199,8 +200,8 @@
+ if test "$with_sane_backend" != no ; then
+ 	unset SANE_BACKEND_DIR_POSSIBILITIES
+ 	if test "$with_sane_backend" != yes ; then
+-		SANE_BACKEND_DIR_POSSIBILITIES=$with_sane_backend
+-	fi
++		SANE_BACKEND_DIR=$with_sane_backend
++	else
+ 
+ 	( foo=`sane-config --ldflags` ) 2>/dev/null
+ 	foo=${foo#-L}
+@@ -229,6 +230,7 @@
+ 			fi
+ 		done
+ 	done
++	fi
+ fi
+ if test -n "$SANE_BACKEND_DIR" ; then
+ 	AC_MSG_RESULT($SANE_BACKEND_DIR)
+@@ -245,8 +247,8 @@
+ if test "$with_sane_etc" != no ; then
+ 	unset SANE_ETC_DIR_POSSIBILITIES
+ 	if test "$with_sane_etc" != yes ; then
+-		SANE_ETC_DIR_POSSIBILITIES=$with_sane_etc
+-	fi
++		SANE_ETC_DIR=$with_sane_etc
++	else
+ 
+ 	SANE_ETC_DIR_POSSIBILITIES="$SANE_ETC_DIR_POSSIBILITIES $SANE_CONFIG_DIR"
+ 
+@@ -268,6 +270,7 @@
+ 			break
+ 		fi
+ 	done
++	fi
+ fi
+ if test -n "$SANE_ETC_DIR" ; then
+ 	AC_MSG_RESULT($SANE_ETC_DIR)
+@@ -388,9 +388,7 @@
+ 	if test -n "$HIDE_QT" ; then
+ 		AC_MSG_RESULT(check not done)
+ 	else
+-		changequote(<<,>>)dnl
+-		AC_MSG_RESULT(<<no: try \"$0 --with-qt[-moc|-includes]=<dir>\">>)
+-		changequote([,])dnl
++		AC_MSG_RESULT([no: try \"$0 --with-qt[-moc|-includes]=<dir>\"])
+ 	fi
+ 	AC_MSG_RESULT(*** Disabling xojpanel support due to lack of QT ***)
+ fi
