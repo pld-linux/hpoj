@@ -4,7 +4,7 @@ Name:		hpoj
 Version:	0.90
 Release:	1
 License:	GPL
-Group:          Applications/Graphics
+Group:		Applications/Graphics
 Source0:	http://dl.sourceforge.net/hpoj/%{name}-%{version}.tgz
 # Source0-md5:	dd76385c20bccabf6f5446b1004d8372
 Patch0:		%{name}-opt.patch
