@@ -121,8 +121,10 @@ takiej jak scanimage, xscanimage, xsane itp.
 	--with-sane-backend=/usr/lib/sane \
 	--with-sane-etc=/etc/sane.d
 
+# -D... is a workaround for /usr/include/net-snmp/library/getopt.h
 %{__make} \
-	OPTFLAGS="%{rpmcflags}"
+	CC="%{__cc}" \
+	OPTFLAGS="%{rpmcflags} -D_GETOPT_H_"
 
 %install
 rm -rf $RPM_BUILD_ROOT
