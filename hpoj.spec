@@ -15,9 +15,9 @@ URL:		http://hpoj.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	net-snmp-devel
 BuildRequires:	qt-devel
-PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Requires(post):	/sbin/ldconfig
+Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -47,7 +47,7 @@ i kontrolê jego parametrów.
 Summary:	Displays the contents of the device's LCD
 Summary(pl):	Wy¶wietlanie zawarto¶ci wy¶wietlacza urz±dzenia
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description xojpanel
 xojpanel is a graphical Qt-based application that continuously
@@ -65,7 +65,7 @@ odczyt tych informacji.
 Summary:	Header files for hpoj libraries
 Summary(pl):	Pliki nag³ówkowe bibliotek hpoj
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for hpoj libraries.
@@ -77,7 +77,7 @@ Pliki nag³ówkowe bibliotek hpoj.
 Summary:	hpoj backend for CUPS
 Summary(pl):	Backend hpoj dla CUPS-a
 Group:		Applications/Printing
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	cups
 
 %description -n cups-backend-hpoj
@@ -90,7 +90,7 @@ Backend hpoj dla CUPS-a.
 Summary:	hpoj backend for SANE
 Summary(pl):	Backend hpoj dla SANE
 Group:		Applications/System
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	sane-backends
 
 %description -n sane-backend-hpoj
