@@ -13,6 +13,7 @@ Patch2:		%{name}-dirs.patch
 Patch3:		%{name}-snmp.patch
 URL:		http://hpoj.sourceforge.net/
 BuildRequires:	autoconf
+BuildRequires:	libusb-devel
 BuildRequires:	net-snmp-devel
 BuildRequires:	qt-devel
 Requires(post,preun):	/sbin/chkconfig
@@ -118,7 +119,7 @@ takiej jak scanimage, xscanimage, xsane itp.
 %{__autoconf}
 %configure \
 	--with-cups-backend=/usr/lib/cups/backend \
-	--with-sane-backend=/usr/lib/sane \
+	--with-sane-backend=/usr/%{_lib}/sane \
 	--with-sane-etc=/etc/sane.d
 
 # -D... is a workaround for /usr/include/net-snmp/library/getopt.h
@@ -128,7 +129,7 @@ takiej jak scanimage, xscanimage, xsane itp.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_initrddir},/var/run/ptal-{mlcd,printd}}
+install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/var/run/ptal-{mlcd,printd}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -163,7 +164,7 @@ fi
 %attr(755,root,root) %{_sbindir}/ptal-printd
 %attr(755,root,root) %{_libdir}/libhpojip.so.*.*
 %attr(755,root,root) %{_libdir}/libptal.so.*.*
-%attr(754,root,root) %{_initrddir}/ptal-init
+%attr(754,root,root) /etc/rc.d/init.d/ptal-init
 %dir /var/run/ptal-printd
 %dir /var/run/ptal-mlcd
 
@@ -181,8 +182,8 @@ fi
 %files -n cups-backend-hpoj
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/ptal-cups
-%attr(755,root,root) %{_libdir}/cups/backend/ptal
+%attr(755,root,root) /usr/lib/cups/backend/ptal
 
 %files -n sane-backend-hpoj
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/sane/libsane-hpoj.so.*
+%attr(755,root,root) /usr/%{_lib}/sane/libsane-hpoj.so.*
