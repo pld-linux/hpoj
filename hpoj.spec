@@ -1,5 +1,5 @@
 Summary:	HP OfficeJet Linux driver
-Summary(pl):	Sterowniki dla urz±dzeñ HP OfficeJet
+Summary(pl.UTF-8):   Sterowniki dla urzÄ…dzeÅ„ HP OfficeJet
 Name:		hpoj
 Version:	0.91
 Release:	1
@@ -34,19 +34,19 @@ most models, when either connected to the parallel port or USB on a
 Linux (Intel or Alpha) workstation, or to a LAN with selected HP
 JetDirect print servers.
 
-%description -l pl
-Sterowniki dla HP OfficeJet pozwalaj± na drukowanie i skanowanie
-na wiêkszo¶ci urz±dzeñ wielofunkcyjnych HP pod³±czonych do:
-- portu równoleg³ego,
+%description -l pl.UTF-8
+Sterowniki dla HP OfficeJet pozwalajÄ… na drukowanie i skanowanie
+na wiÄ™kszoÅ›ci urzÄ…dzeÅ„ wielofunkcyjnych HP podÅ‚Ä…czonych do:
+- portu rÃ³wnolegÅ‚ego,
 - portu USB
 - sieci poprzez serwer wydruku HP JetDirect.
 
-Dodatkowe aplikacje umo¿liwiaj± dostêp do widoku panelu LCD urz±dzenia
-i kontrolê jego parametrów.
+Dodatkowe aplikacje umoÅ¼liwiajÄ… dostÄ™p do widoku panelu LCD urzÄ…dzenia
+i kontrolÄ™ jego parametrÃ³w.
 
 %package xojpanel
 Summary:	Displays the contents of the device's LCD
-Summary(pl):	Wy¶wietlanie zawarto¶ci wy¶wietlacza urz±dzenia
+Summary(pl.UTF-8):   WyÅ›wietlanie zawartoÅ›ci wyÅ›wietlacza urzÄ…dzenia
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 
@@ -56,27 +56,27 @@ displays the contents of the LCD (liquid crystal display) on the
 device's front panel, for devices which support readback of this
 information.
 
-%description xojpanel -l pl
-xojpanel to oparta na Qt graficzna aplikacja stale wy¶wietlaj±ca
-zawarto¶æ wy¶wietlacza ciek³okrystalicznego (LCD) umieszczonego
-na przednim panelu urz±dzenia - dla urz±dzeñ, które obs³uguj±
+%description xojpanel -l pl.UTF-8
+xojpanel to oparta na Qt graficzna aplikacja stale wyÅ›wietlajÄ…ca
+zawartoÅ›Ä‡ wyÅ›wietlacza ciekÅ‚okrystalicznego (LCD) umieszczonego
+na przednim panelu urzÄ…dzenia - dla urzÄ…dzeÅ„, ktÃ³re obsÅ‚ugujÄ…
 odczyt tych informacji.
 
 %package devel
 Summary:	Header files for hpoj libraries
-Summary(pl):	Pliki nag³ówkowe bibliotek hpoj
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe bibliotek hpoj
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for hpoj libraries.
 
-%description devel -l pl
-Pliki nag³ówkowe bibliotek hpoj.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe bibliotek hpoj.
 
 %package -n cups-backend-hpoj
 Summary:	hpoj backend for CUPS
-Summary(pl):	Backend hpoj dla CUPS-a
+Summary(pl.UTF-8):   Backend hpoj dla CUPS-a
 Group:		Applications/Printing
 Requires:	%{name} = %{version}-%{release}
 Requires:	cups
@@ -84,12 +84,12 @@ Requires:	cups
 %description -n cups-backend-hpoj
 hpoj backend for CUPS.
 
-%description -n cups-backend-hpoj -l pl
+%description -n cups-backend-hpoj -l pl.UTF-8
 Backend hpoj dla CUPS-a.
 
 %package -n sane-backend-hpoj
 Summary:	hpoj backend for SANE
-Summary(pl):	Backend hpoj dla SANE
+Summary(pl.UTF-8):   Backend hpoj dla SANE
 Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
 Requires:	sane-backends
@@ -101,11 +101,11 @@ the SANE backend API standard and is accessible via any number of
 SANE-compliant frontend applications, such as scanimage, xscanimage,
 xsane, etc.
 
-%description -n sane-backend-hpoj -l pl
-Biblioteka dzielona libsane-hpoj to backend dla SANE obs³uguj±cy
-skanowanie na urz±dzeniach wielofunkcyjnych obs³ugiwanych przez
-sterowniki hpoj. Jest implementacj± standardu API dla backendów SANE i
-jest dostêpny z poziomu ka¿dej aplikacji frontendowej zgodnej z SANE,
+%description -n sane-backend-hpoj -l pl.UTF-8
+Biblioteka dzielona libsane-hpoj to backend dla SANE obsÅ‚ugujÄ…cy
+skanowanie na urzÄ…dzeniach wielofunkcyjnych obsÅ‚ugiwanych przez
+sterowniki hpoj. Jest implementacjÄ… standardu API dla backendÃ³w SANE i
+jest dostÄ™pny z poziomu kaÅ¼dej aplikacji frontendowej zgodnej z SANE,
 takiej jak scanimage, xscanimage, xsane itp.
 
 %prep
