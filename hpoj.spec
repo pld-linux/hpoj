@@ -1,5 +1,5 @@
 Summary:	HP OfficeJet Linux driver
-Summary(pl.UTF-8):   Sterowniki dla urządzeń HP OfficeJet
+Summary(pl.UTF-8):	Sterowniki dla urządzeń HP OfficeJet
 Name:		hpoj
 Version:	0.91
 Release:	1
@@ -46,7 +46,7 @@ i kontrolę jego parametrów.
 
 %package xojpanel
 Summary:	Displays the contents of the device's LCD
-Summary(pl.UTF-8):   Wyświetlanie zawartości wyświetlacza urządzenia
+Summary(pl.UTF-8):	Wyświetlanie zawartości wyświetlacza urządzenia
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 
@@ -64,7 +64,7 @@ odczyt tych informacji.
 
 %package devel
 Summary:	Header files for hpoj libraries
-Summary(pl.UTF-8):   Pliki nagłówkowe bibliotek hpoj
+Summary(pl.UTF-8):	Pliki nagłówkowe bibliotek hpoj
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -76,7 +76,7 @@ Pliki nagłówkowe bibliotek hpoj.
 
 %package -n cups-backend-hpoj
 Summary:	hpoj backend for CUPS
-Summary(pl.UTF-8):   Backend hpoj dla CUPS-a
+Summary(pl.UTF-8):	Backend hpoj dla CUPS-a
 Group:		Applications/Printing
 Requires:	%{name} = %{version}-%{release}
 Requires:	cups
@@ -89,7 +89,7 @@ Backend hpoj dla CUPS-a.
 
 %package -n sane-backend-hpoj
 Summary:	hpoj backend for SANE
-Summary(pl.UTF-8):   Backend hpoj dla SANE
+Summary(pl.UTF-8):	Backend hpoj dla SANE
 Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
 Requires:	sane-backends
